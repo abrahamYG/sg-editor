@@ -2,56 +2,18 @@ import Col from "react-bootstrap/Col";
 import ListGroup from "react-bootstrap/ListGroup";
 import Row from "react-bootstrap/Row";
 import Tab from "react-bootstrap/Tab";
-import Trigger from "./Trigger";
+import type { Trigger } from "../interfaces/Trigger";
+import MeleeInitialization from "../samples/MeleeInitialization.json";
+import StormgateContested from "../samples/StormgateContested.json";
+import TriggerComponent from "./TriggerComponent";
+
+
+
+
 function TriggerList() {
-  const triggers = [
-    {
-      id: "link1",
-      label: "Melee Initialization",
-      events: [
-        {
-          label: "Melee Init",
-        }
-      ],
-      variables: [
-        
-      ],
-      conditions: [
-        
-      ],
-      actions: [
-        {
-          label: "Create melee units",
-        },
-      ],
-    },
-    { 
-		id: "link2", 
-		label: "Hero enters location",
-		events: [
-        {
-          label: "(Hero) Enters (Region)",
-        },
-        {
-          label: "(Hero) Enters (Region)",
-        },
-      ],
-      variables: [
-        {
-          label: "Hero<unit> = (Triggering Unit)",
-        }
-      ],
-      conditions: [
-        {
-          label: 'Unit type of (Hero) = "Akama"',
-        },
-      ],
-      actions: [
-        {
-          label: "End game in (Victory)", 
-        },
-      ],
-	},
+  const triggers:Trigger[] = [
+    MeleeInitialization,
+    StormgateContested
   ];
   return (
     <Tab.Container id="list-group-tabs-example">
@@ -60,7 +22,7 @@ function TriggerList() {
           <ListGroup>
             {triggers.map((trigger) => (
               <ListGroup.Item action href={`#${trigger.id}`} key={trigger.id}>
-                {trigger.label}
+                {trigger.id}
               </ListGroup.Item>
             ))}
           </ListGroup>
@@ -68,7 +30,7 @@ function TriggerList() {
         <Col sm={8}>
           <Tab.Content>
             {triggers.map((trigger) => (
-              <Trigger triggerData={trigger} key={trigger.id} />
+              <TriggerComponent triggerData={trigger} key={trigger.id} />
             ))}
           </Tab.Content>
         </Col>
