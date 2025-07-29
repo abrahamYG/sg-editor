@@ -1,2 +1,1 @@
-
-export type FunctionType = 'Function' | 'Action' | 'Event' | 'Condition';
+export type FunctionType = "Function" | "Action" | "Event" | "Condition";

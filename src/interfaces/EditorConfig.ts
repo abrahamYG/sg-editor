@@ -1,5 +1,4 @@
-
 export interface EditorConfig {
-  node?: string;
-  icon?: string;
+	node?: string;
+	icon?: string;
 }

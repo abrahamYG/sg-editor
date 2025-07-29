@@ -1,4 +1,4 @@
-export interface TypeDescriptor {
+export interface IType {
 	directive?: string;
 	implements?: string;
 	inner_type?: string;
