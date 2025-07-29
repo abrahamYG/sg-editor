@@ -3,8 +3,8 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Row from "react-bootstrap/Row";
 import Tab from "react-bootstrap/Tab";
 import type { ITrigger } from "../interfaces/ITrigger";
-import MeleeInitialization from "../samples/MeleeInitialization.json";
-import StormgateContested from "../samples/StormgateContested.json";
+import MeleeInitialization from "../samples/MeleeInitialization";
+import StormgateContested from "../samples/StormgateContested";
 import TriggerComponent from "./TriggerComponent";
 
 function TriggerList() {
