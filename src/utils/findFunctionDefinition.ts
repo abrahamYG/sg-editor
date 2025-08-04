@@ -4,18 +4,19 @@ import { ActionDefStore } from "../store/actionDefStore";
 import { FunctionDefStore } from "../store/functionDefStore";
 import { EventDefStore } from "../store/eventDefStore";
 import { ConditionDefStore } from "../store/conditionDefStore";
-
-export function findFunctionDefinition(
-	id: string,
-	type?: FunctionType
-): IFunctionDef | undefined {
-	const definitions: IFunctionDef[] = [
+const definitions: IFunctionDef[] = [
 		...FunctionDefStore,
 		...ActionDefStore,
 		...EventDefStore,
 		...ConditionDefStore,
 	];
-	return definitions.find(
-		(def: IFunctionDef) => def.id === id && (!type || def.type === type)
+export function findFunctionDefinition(
+	id: string,
+	type?: FunctionType
+): IFunctionDef | undefined {
+	const found = definitions.find(
+		({id:defId}) => defId === id
 	);
+	console.log(`findFunctionDefinition: id=${id}, type=${type}, found=${!!found}`);
+	return found;
 }

@@ -6,9 +6,7 @@ import Tabs from "react-bootstrap/Tabs";
 import type { ITrigger } from "../interfaces/ITrigger";
 //import TriggerItemFunctionCall from "./TriggerItemFunctionCall";
 import TriggerItemVariable from "./TriggerItemVariable";
-import { Tree, type TreeExpandedKeysType } from "primereact/tree";
-import { functionCallToTreeNode } from "../utils/functionCallToTreeNode";
-import type { TreeNode } from "primereact/treenode";
+import FunctionCallTree from "./FunctionCallTree";
 
 interface TriggerProps {
 	triggerData: ITrigger;
@@ -16,32 +14,6 @@ interface TriggerProps {
 function TriggerComponent({ triggerData }: TriggerProps) {
 	const { events, variables, conditions, actions } = triggerData;
 	const id = triggerData.id || "unknown-trigger";
-	const treeNodes = {
-		events: events.map((event) => functionCallToTreeNode(event)),
-		conditions: conditions.map((condition) =>
-			functionCallToTreeNode(condition)
-		),
-		actions: actions.map((action) => functionCallToTreeNode(action)),
-	};
-
-	const expandAllNodes = (nodes: TreeNode[]): TreeExpandedKeysType => {
-		const expandedKeys: TreeExpandedKeysType = {};
-		for (const node of nodes) {
-			if (node.key) {
-				expandedKeys[node.key] = true;
-			}
-		}
-		return expandedKeys;
-	};
-
-	const expandedKeys = {
-		events: expandAllNodes(treeNodes.events),
-		conditions: expandAllNodes(treeNodes.conditions),
-		actions: expandAllNodes(treeNodes.actions),
-	};
-	//  const nodeTemplate = (type:string,node: TreeNode) => {
-	//       return <TriggerItemFunctionCall key={node.key} type={type} data={node.data} />
-	//   }
 	return (
 		<Tab.Pane eventKey={"#" + id}>
 			<Tabs
@@ -59,10 +31,7 @@ function TriggerComponent({ triggerData }: TriggerProps) {
 								Events
 							</Form.Label>
 							<Col sm={10}>
-								<Tree
-									value={treeNodes.events}
-									expandedKeys={expandedKeys.events}
-								/>
+								<FunctionCallTree functionCalls={events} type="Event"/>
 							</Col>
 						</Form.Group>
 						<Form.Group
@@ -89,10 +58,7 @@ function TriggerComponent({ triggerData }: TriggerProps) {
 								Conditions
 							</Form.Label>
 							<Col sm={10}>
-								<Tree
-									value={treeNodes.conditions}
-									expandedKeys={expandedKeys.events}
-								/>
+								<FunctionCallTree functionCalls={conditions} type="Condition"/>
 							</Col>
 						</Form.Group>
 						<Form.Group
@@ -103,10 +69,7 @@ function TriggerComponent({ triggerData }: TriggerProps) {
 								Actions
 							</Form.Label>
 							<Col sm={10}>
-								<Tree
-									value={treeNodes.actions}
-									expandedKeys={expandedKeys.events}
-								/>
+								<FunctionCallTree functionCalls={actions} type="Action"/>
 							</Col>
 						</Form.Group>
 					</Form>

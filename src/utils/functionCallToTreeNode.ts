@@ -3,6 +3,7 @@ import type { ISubFunction } from "../interfaces/ISubFunction";
 import type { TreeNode } from "primereact/treenode";
 import { parseFunctionGrammarText } from "./parseFunctionGrammarText";
 import { findFunctionDefinition } from "./findFunctionDefinition";
+import functionCallToString from "./functionCallToString";
 
 /**
  * Maps a FunctionCall object to an ITreeNode.
@@ -10,6 +11,7 @@ import { findFunctionDefinition } from "./findFunctionDefinition";
  * @returns ITreeNode
  */
 export function functionCallToTreeNode(funcCall: FunctionCall): TreeNode {
+	console.log(functionCallToString(funcCall)); // Ensure functionCallToString is called for side effects
 	const node: TreeNode = {
 		key: funcCall.guid || funcCall.function_id,
 		label: parseFunctionGrammarText(

@@ -33,7 +33,7 @@ function FunctionListModal({ label, type }: FunctionListModalProps) {
 		),
 	};
 
-	console.log(type, definitions[type as keyof typeof definitions]);
+	//console.log(type, definitions[type as keyof typeof definitions]);
 	return (
 		<>
 			<Button variant="primary" onClick={handleShow}>
